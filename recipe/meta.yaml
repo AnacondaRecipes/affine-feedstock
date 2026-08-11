@@ -1,5 +1,5 @@
 {% set name = "affine" %}
-{% set version = "2.4.0" %}
+{% set version = "3.0.0" %}
 
 package:
   name: {{ name|lower }}
@@ -7,11 +7,11 @@ package:
 
 source:
   url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: a24d818d6a836c131976d22f8c27b8d3ca32d0af64c1d8d29deb7bafa4da1eea
+  sha256: 573514d5c37e98401a0ec34139c2b725d9f9ae4d074662f4b62a47d6a2ba9f06
 
 build:
   number: 0
-  skip: True  # [py<37]
+  skip: true  # [py<39]
   script: {{ PYTHON }} -m pip install . --no-deps --no-build-isolation -vv
 
 requirements:
@@ -21,6 +21,7 @@ requirements:
     - pip
   run:
     - python
+    - attrs
 
 test:
   source_files:
@@ -38,13 +39,12 @@ test:
 about:
   home: https://github.com/sgillies/affine
   license: BSD-3-Clause
-  summary: 'Matrices describing affine transformation of the plane.'
+  summary: Matrices describing affine transformation of the plane.
   license_family: BSD
   license_file: LICENSE.txt
   description: |
     The Affine package is used to produce the affine transformation
     matrix.
-  doc_source_url: https://github.com/sgillies/affine/blob/master/README.rst
   dev_url: https://github.com/sgillies/affine
 
 extra:
