@@ -1,26 +1,27 @@
 {% set name = "affine" %}
-{% set version = "2.4.0" %}
+{% set version = "3.0.0" %}
 
 package:
-  name: {{ name|lower }}
+  name: {{ name }}
   version: {{ version }}
 
 source:
   url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: a24d818d6a836c131976d22f8c27b8d3ca32d0af64c1d8d29deb7bafa4da1eea
+  sha256: 573514d5c37e98401a0ec34139c2b725d9f9ae4d074662f4b62a47d6a2ba9f06
 
 build:
   number: 0
-  skip: True  # [py<37]
   script: {{ PYTHON }} -m pip install . --no-deps --no-build-isolation -vv
+  skip: true  # [py<39]
 
 requirements:
   host:
-    - flit-core >=3.2,<4
-    - python
     - pip
+    - python
+    - flit-core >=3.2,<4
   run:
     - python
+    - attrs
 
 test:
   source_files:
@@ -29,7 +30,7 @@ test:
     - affine
   requires:
     - pip
-    - pytest >=4.6
+    - pytest >=6
   commands:
     - pip check
     - python -c "from importlib.metadata import version; assert(version('{{ name|lower }}')=='{{ version }}')"
