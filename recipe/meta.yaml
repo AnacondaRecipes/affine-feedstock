@@ -25,7 +25,7 @@ requirements:
 
 test:
   source_files:
-    - affine/tests
+    - tests
   imports:
     - affine
   requires:
@@ -34,7 +34,7 @@ test:
   commands:
     - pip check
     - python -c "from importlib.metadata import version; assert(version('{{ name|lower }}')=='{{ version }}')"
-    - pytest affine/tests -v
+    - pytest tests -v
 
 about:
   home: https://github.com/sgillies/affine
